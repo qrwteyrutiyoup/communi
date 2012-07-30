@@ -60,12 +60,17 @@ private:
     QString pfx;
 };
 
+#include "qtscroller.h"
+
 static QStringListModel* command_model = 0;
 
 MessageView::MessageView(const QString& receiver, Session* session, QWidget* parent) :
     QWidget(parent)
 {
     d.setupUi(this);
+
+    QtScroller::grabGesture(d.textBrowser->viewport());
+    QtScroller::grabGesture(d.listView->viewport());
 
     setFocusProxy(d.lineEditor);
     d.textBrowser->installEventFilter(this);
